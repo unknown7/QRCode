@@ -16,24 +16,30 @@
 <script type="text/javascript" src="dwr/interface/messagePush.js"></script>
 
 <script type="text/javascript">
+	//这个方法用来启动该页面的ReverseAjax功能
+	dwr.engine.setActiveReverseAjax(true);
+	//设置在页面关闭时，通知服务端销毁会话
+	dwr.engine.setNotifyServerOnPageUnload(true);
+	//这个函数是提供给后台推送的时候 调用的
+	function show(uuid, user, loginStatus) {
+		var _uuid = $("#uuid").val();
+		if (uuid == _uuid && loginStatus == true) {
+			$("#content").text(user + " 登录成功！");
+			/* setTimeout(function() {
+				window.location.href = "pizi.jsp";
+			}, 1000); */
+		} else if (uuid == _uuid && loginStatus == false) {
+			$("#content").text(user + " 正在登录...");
+		}
+	}
 </script>
 
 </head>
 <body>
 	<img alt="" src="${ctx }/QRCode.do">
 	
-	<input type="hidden" value="${uuid }">
-	<!-- <table border="0">
-		<tr>
-			<td><input id="content" type="text" /></td>
-			<td><input id="send" type="button" value="send" /></td>
-		</tr>
-	</table>
-	<script type="text/javascript">
-		$("#send").click(function() {
-			var content = $("#content").val();
-			messagePush.send(content);
-		});
-	</script> -->
+	<input id="uuid" type="hidden" value="${uuid }">
+	
+	<div id="content" style="width: 200px; height: 30px; border: 1px solid; text-align: center; padding: 5px;"></div>
 </body>
 </html>

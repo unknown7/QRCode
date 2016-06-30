@@ -9,6 +9,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.alibaba.fastjson.JSONObject;
 import com.google.zxing.BarcodeFormat;
@@ -36,8 +37,9 @@ public class QRCodeGenerator extends HttpServlet {
 			throws ServletException, IOException {
 		JSONObject json = new JSONObject();
 		UUID uuid = UUID.randomUUID();
-		req.setAttribute("uuid", uuid);
 		json.put("uid", uuid);
+		HttpSession session = req.getSession();
+		session.setAttribute("uuid", 1);
 		String content = json.toJSONString();// 内容
 		int width = 200; // 图像宽度
 		int height = 200; // 图像高度
