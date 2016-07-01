@@ -21,14 +21,11 @@
 	//设置在页面关闭时，通知服务端销毁会话
 	dwr.engine.setNotifyServerOnPageUnload(true);
 	//这个函数是提供给后台推送的时候 调用的
-	function show(uuid, user, loginStatus) {
-		var _uuid = $("#uuid").val();
-		if (uuid == _uuid && loginStatus == true) {
+	function show(id, user, loginStatus) {
+		var _id = $("input[type=hidden]").val();
+		if (id == _id && loginStatus == true) {
 			$("#content").text(user + " 登录成功！");
-			/* setTimeout(function() {
-				window.location.href = "pizi.jsp";
-			}, 1000); */
-		} else if (uuid == _uuid && loginStatus == false) {
+		} else if (id == _id && loginStatus == false) {
 			$("#content").text(user + " 正在登录...");
 		}
 	}
@@ -38,7 +35,7 @@
 <body>
 	<img alt="" src="${ctx }/QRCode.do">
 	
-	<input id="uuid" type="hidden" value="${uuid }">
+	<input type="hidden" value="${sid }">
 	
 	<div id="content" style="width: 200px; height: 30px; border: 1px solid; text-align: center; padding: 5px;"></div>
 </body>

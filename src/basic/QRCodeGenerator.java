@@ -3,7 +3,6 @@ package basic;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.UUID;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -36,10 +35,10 @@ public class QRCodeGenerator extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 		JSONObject json = new JSONObject();
-		UUID uuid = UUID.randomUUID();
-		json.put("uid", uuid);
 		HttpSession session = req.getSession();
-		session.setAttribute("uuid", 1);
+		String sid = Encrypt.encode(session.getId());
+		session.setAttribute("sid", sid);
+		json.put("sid", sid);
 		String content = json.toJSONString();// 内容
 		int width = 200; // 图像宽度
 		int height = 200; // 图像高度

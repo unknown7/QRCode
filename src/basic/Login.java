@@ -20,9 +20,9 @@ public class Login extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
-		String uuid = req.getParameter("uuid");
+		String sid = req.getParameter("sid");
 		String user = req.getParameter("user");
 		boolean loginStatus = Boolean.valueOf(req.getParameter("loginStatus"));
-		MessagePush.send(uuid, user, loginStatus);
+		MessagePush.send(sid, user, loginStatus);
 	}
 }
